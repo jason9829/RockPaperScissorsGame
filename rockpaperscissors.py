@@ -1,7 +1,20 @@
 #  Inspiration: https://www.codementor.io/@ilyaas97/6-python-projects-for-beginners-yn3va03fs
 #  Ref: https://thehelloworldprogram.com/python/python-game-rock-paper-scissors/
 
+from tkinter import *
 from random import randint
+import ctypes  # An included library with Python install.
+
+
+#  Pop up GUI
+popup = Tk()    # For user select game rounds
+main = Tk()     # Main Pop up
+
+#  Number of game rounds
+globalGameRound = 0
+
+#  Player play options
+globalUserPlayOption = "None"
 
 #  Start flag
 start = False
@@ -72,5 +85,86 @@ def gameManager():
 
         gameRound -= 1
 
-# Commented out for unittests else hang instantiating tests...
-# gameManager()
+
+if __name__ == "__main__":
+    # Commented out for unittests else hang instantiating tests...
+    # Uncomment to test the game here
+    #gameManager()
+    #main()
+#  ref: https://www.youtube.com/watch?v=ELkaEpN29PU
+
+#  -------------------GUI-----------------------------
+#   Create windows object
+
+    def userSelectRock():
+        global globalUserPlayOption
+        globalUserPlayOption = "Rock"
+        print("You selected Rock")
+
+    def userSelectPaper():
+        global globalUserPlayOption
+        globalUserPlayOption = "Paper"
+        print("You selected Paper")
+
+    def userSelectScissors():
+        global globalUserPlayOption
+        globalUserPlayOption = "Scissors"
+        print("You selected Scissors")
+
+    def userInputRound(arg):
+        print(arg)
+
+    def userSelectOneRound():
+        global globalGameRound
+        globalGameRound = 1
+        popup.destroy()
+        print(globalGameRound)
+
+    def userSelectThreeRound():
+        global globalGameRound
+        globalGameRound = 3
+        popup.destroy()
+        print(globalGameRound)
+
+    def userSelectTenRound():
+        global globalGameRound
+        globalGameRound = 10
+        popup.destroy()
+        print(globalGameRound)
+
+
+#  Create an popup message box for user to select game round
+def popupMsgSelectGameRound(msg):
+
+    popup.wm_title("Game Menu")
+    label = Label(popup, text=msg)
+    label.pack(side="top", fill="x", pady=10)
+    B1 = Button(popup, text="1", command=userSelectOneRound)
+    B1.pack()
+    B2 = Button(popup, text="3", command=userSelectThreeRound)
+    B2.pack()
+    B3 = Button(popup, text="10", command=userSelectTenRound)
+    B3.pack()
+    popup.deiconify()
+
+
+def popupMain():
+    main.title('Rock, Paper and Scissors Game, by Jason')
+    main.geometry('500x350')
+
+    #  Create the play option buttons
+    main.ButtonRock = Button(main, text="Rock", command=userSelectRock).place(x=2, y=2)
+    main.ButtonPaper = Button(main, text="Paper", command=userSelectPaper).place(x=50, y=50)
+    main.ButtonScissors = Button(main, text="Scissors", command=userSelectScissors).place(x=100, y=100)
+
+    main.mainloop()
+
+
+popupMsgSelectGameRound("Please select the rounds to be played.")
+popupMain()
+
+
+
+
+
+

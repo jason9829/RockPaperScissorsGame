@@ -15,8 +15,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in test_rockpaperscissors.py">
+  <component name="RunManager" selected="Python.rockpaperscissors">
     <configuration name="rockpaperscissors" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="RockPaperScissorsGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -38,6 +39,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests for test_rockpaperscissors.TestgameNotTiedHandler.test_n_gameNotTiedHandler_given_pAPeR_and_RocK_expect_you_lose_message" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="RockPaperScissorsGame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_rockpaperscissors.TestgameNotTiedHandler.test_n_gameNotTiedHandler_given_pAPeR_and_RocK_expect_you_lose_message&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_rockpaperscissors.TestisTheGameTied" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="RockPaperScissorsGame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_rockpaperscissors.TestisTheGameTied&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Unittests in test_rockpaperscissors.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="RockPaperScissorsGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -54,8 +83,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests in test_rockpaperscissors.py" />
         <item itemvalue="Python.rockpaperscissors" />
+        <item itemvalue="Python tests.Unittests for test_rockpaperscissors.TestisTheGameTied" />
+        <item itemvalue="Python tests.Unittests for test_rockpaperscissors.TestgameNotTiedHandler.test_n_gameNotTiedHandler_given_pAPeR_and_RocK_expect_you_lose_message" />
+        <item itemvalue="Python tests.Unittests in test_rockpaperscissors.py" />
       </list>
     </recent_temporary>
   </component>
@@ -73,25 +104,41 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1308" height="165" key="GridCell.Tab.0.bottom" timestamp="1582012670625">
+    <state width="1344" height="169" key="GridCell.Tab.0.bottom" timestamp="1582510298070">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="165" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582012670625" />
-    <state width="1308" height="165" key="GridCell.Tab.0.center" timestamp="1582012670625">
+    <state width="1344" height="169" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582510298070" />
+    <state width="1344" height="169" key="GridCell.Tab.0.center" timestamp="1582510298069">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="165" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582012670625" />
-    <state width="1308" height="165" key="GridCell.Tab.0.left" timestamp="1582012670625">
+    <state width="1344" height="169" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582510298069" />
+    <state width="1344" height="169" key="GridCell.Tab.0.left" timestamp="1582510298069">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="165" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582012670625" />
-    <state width="1308" height="165" key="GridCell.Tab.0.right" timestamp="1582012670625">
+    <state width="1344" height="169" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582510298069" />
+    <state width="1344" height="169" key="GridCell.Tab.0.right" timestamp="1582510298070">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1308" height="165" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582012670625" />
-    <state x="757" y="373" key="com.intellij.ide.util.TipDialog" timestamp="1582012201058">
+    <state width="1344" height="169" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582510298070" />
+    <state width="1344" height="216" key="GridCell.Tab.1.bottom" timestamp="1582508501121">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="757" y="373" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1582012201058" />
+    <state width="1344" height="216" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582508501121" />
+    <state width="1344" height="216" key="GridCell.Tab.1.center" timestamp="1582508501121">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="216" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1582508501121" />
+    <state width="1344" height="216" key="GridCell.Tab.1.left" timestamp="1582508501121">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="216" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1582508501121" />
+    <state width="1344" height="216" key="GridCell.Tab.1.right" timestamp="1582508501121">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="216" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1582508501121" />
+    <state x="757" y="373" key="com.intellij.ide.util.TipDialog" timestamp="1582508391063">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="757" y="373" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1582508391063" />
   </component>
 </project>
