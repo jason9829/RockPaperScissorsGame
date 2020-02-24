@@ -109,21 +109,21 @@ def gameNotTiedHandlerGUI(userOption, computerOption):
         global userWinCount
         userWinCount += 1
         print(userWinCount)
-        return "You win! Rock beats Scissors."
+        return "You win! Rock beats Scissors.  "
     elif userOption.lower() == "rock" and computerOption.lower() == "paper":
         global computerWinCount
         computerWinCount += 1
         print(computerWinCount)
-        return "You lose! Paper beats Rock."
+        return "You lose! Paper beats Rock.   "
     elif userOption.lower() == "paper" and computerOption.lower() == "rock":
         userWinCount += 1
-        return "You win! Paper beats Rock."
+        return "You win! Paper beats Rock.    "
     elif userOption.lower() == "paper" and computerOption.lower() == "scissors":
         computerWinCount += 1
-        return "You lose! Scissors beats Paper."
+        return "You lose! Scissors beats Paper.   "
     elif userOption.lower() == "scissors" and computerOption.lower() == "paper":
         userWinCount += 1
-        return "You win! Scissors beats Paper."
+        return "You win! Scissors beats Paper.   "
     elif userOption.lower() == "scissors" and computerOption.lower() == "rock":
         computerWinCount += 1
         return "You lose! Rock beats Scissors."
@@ -240,6 +240,27 @@ def popupMsg(msg):
     ctypes.windll.user32.MessageBoxW(0, msg, "Message", 16)
 
 
+# Show message on the window
+def showMsg(msg):
+    if msg is None:
+        return ''
+    msg_Label = Label(main, text="Message: " + msg)
+    msg_Label.config(font=("Courier", 10))
+    msg_Label.place(x=150, y=40)
+
+
+# Find the winner of the game
+def getWinner(userWin, Tie, computerWin):
+    if userWin > computerWin:
+        return "The winner is User, YOU WIN!"
+    elif userWin < computerWin:
+        return "The winner is Computer, YOU LOSE!"
+    else:
+        global gameRound
+        gameRound += 1
+        return "Game tied! Play one more round..."
+
+
 #  Desc: Main function to call functions to perform
 #        the game - GUI version
 #  Param: None
@@ -260,18 +281,22 @@ def gameManagerGUI():
             global tieCount
             tieCount += 1
             updateScoreBoard()
-            popupMsg("Tie!")
+            #  Could not find a way to update the text
+            #  This is a work around
+            showMsg("Tie!                                ")
         else:
             if globalGameRound != STOP_GAME_FLAG:
-                popupMsg(gameNotTiedHandlerGUI(userPlayOption, computerPlayOption))
+                showMsg(gameNotTiedHandlerGUI(userPlayOption, computerPlayOption))
                 updateScoreBoard()
         globalGameRound -= 1
         gameRound += 1
         main.mainloop()
+    popupMsg(getWinner(userWinCount, tieCount, computerWinCount))
     gameRound = 1   # Reset the value
 
 
-gameManagerGUI()
+while True:
+    gameManagerGUI()
 
 
 
