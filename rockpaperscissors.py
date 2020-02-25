@@ -27,6 +27,7 @@ globalUserPlayOption = "None"
 
 #  Start flag
 start = False
+
 #  Create a list of play options
 playOptions = ["Rock", "Paper", "Scissors"]
 
@@ -129,6 +130,14 @@ def gameNotTiedHandlerGUI(userOption, computerOption):
         return "You lose! Rock beats Scissors."
 
 
+# Determine is the end result is tied with input str
+def isGameTied(arg):
+    if arg == "Game tied! Play one more round...":
+        return True
+    else:
+        return False
+
+
 # Show the score between user, tie and computer
 # Ref: https://stackoverflow.com/questions/31707206/tkinter-label-counter-variable
 def updateScoreBoard():
@@ -142,58 +151,71 @@ def updateScoreBoard():
     ComputerWin_Label.place(x=110, y=270)
 
 
+#  Reset the scoreboard after the game is completed
+def resetScoreBoard():
+    global userWinCount, tieCount, computerWinCount
+    userWinCount = 0
+    tieCount = 0
+    computerWinCount = 0
+    updateScoreBoard()
+
+
 #  Update the game round and display on main windows
 def updateGameRound():
-    gameRound_Label = Label(main, text="Game round: " + str(gameRound))
+    if globalGameRound == STOP_GAME_FLAG:
+        gameRound_Label = Label(main, text="Round left: " + "XX" + "  ")
+    else:
+        gameRound_Label = Label(main, text="Round left: " + str(globalGameRound) + "  ")
+
     gameRound_Label.config(font=("Courier", 10))
     gameRound_Label.place(x=370, y=20)
 
 
+#-----------------Events for button pressed-----------------
 def userSelectRock():
     global globalUserPlayOption
     globalUserPlayOption = "Rock"
-    print("You selected Rock")
     main.quit()
     # quit() will close the window but not mainloop()
     # destroy() will close the windows and mainloop()
+    # No withdraw() here because it's the main window
+    # If use then the app is basically closed.
 
 
 def userSelectPaper():
     global globalUserPlayOption
     globalUserPlayOption = "Paper"
-    print("You selected Paper")
     main.quit()
 
 
 def userSelectScissors():
     global globalUserPlayOption
     globalUserPlayOption = "Scissors"
-    print("You selected Scissors")
     main.quit()
-
-
-def userInputRound(arg):
-    print(arg)
+    print("You selected Scissors")
 
 
 def userSelectOneRound():
     global globalGameRound
     globalGameRound = 1
-    popup.destroy()
+    updateGameRound()
+    popup.withdraw()
     print(globalGameRound)
 
 
 def userSelectThreeRound():
     global globalGameRound
     globalGameRound = 3
-    popup.destroy()
+    updateGameRound()
+    popup.withdraw()
     print(globalGameRound)
 
 
 def userSelectTenRound():
     global globalGameRound
     globalGameRound = 10
-    popup.destroy()
+    updateGameRound()
+    popup.withdraw()
     print(globalGameRound)
 
 
@@ -216,7 +238,6 @@ def popupMsgSelectGameRound(msg):
     B3.pack()
     B4 = Button(popup, text="Exit", width=10, height=5, command=userSelectExit)
     B4.pack()
-    popup.deiconify()
 
 
 # GUI menu to play the game
@@ -224,7 +245,6 @@ def popupMain():
     main.resizable(False, False)
     main.title('Rock, Paper and Scissors Game, by Jason')
     main.geometry('500x350')
-
     #  Create the play option buttons
     #  Ref: https://stackoverflow.com/questions/46284901/how-do-i-resize-buttons-in-pixels-tkinter/
     #  Reference to resize the button
@@ -232,6 +252,14 @@ def popupMain():
     main.ButtonPaper = Button(main, text="Paper", command=userSelectPaper).place(x=0, y=116, width=100, height=116)
     main.ButtonScissors = Button(main, text="Scissors", command=userSelectScissors).place(x=0, y=232, width=100,
                                                                                           height=116)
+
+
+# Initialise the windows of hide it using withdraw()
+def initWindows():
+    popupMain()
+    main.withdraw()  # Hide the window and use deiconify() to show later
+    popupMsgSelectGameRound("Please select the rounds to be played or exit.")
+    popup.withdraw()
 
 
 # GUI message box just to display the message
@@ -249,15 +277,13 @@ def showMsg(msg):
     msg_Label.place(x=150, y=40)
 
 
-# Find the winner of the game
-def getWinner(userWin, Tie, computerWin):
+# Find the final result of the game
+def getGameResult(userWin, Tie, computerWin):
     if userWin > computerWin:
         return "The winner is User, YOU WIN!"
     elif userWin < computerWin:
         return "The winner is Computer, YOU LOSE!"
     else:
-        global gameRound
-        gameRound += 1
         return "Game tied! Play one more round..."
 
 
@@ -266,37 +292,50 @@ def getWinner(userWin, Tie, computerWin):
 #  Param: None
 #  Retval: None
 def gameManagerGUI():
-    popupMsgSelectGameRound("Please select the rounds to be played or exit.")
     global globalGameRound
+    global computerPlayOption
     global globalUserPlayOption
     global gameRound
 
+    initWindows()
+    popup.deiconify()
+    main.deiconify()
     while globalGameRound != 0:
         updateGameRound()
         updateScoreBoard()
-        popupMain()
         userPlayOption = globalUserPlayOption
         computerPlayOption = playOptions[randint(0, 2)]
-        if isTheGameTied(userPlayOption, computerPlayOption):
+        if isTheGameTied(userPlayOption, computerPlayOption) and globalGameRound != STOP_GAME_FLAG:
             global tieCount
             tieCount += 1
             updateScoreBoard()
             #  Could not find a way to update the text
             #  This is a work around
             showMsg("Tie!                                ")
+            globalGameRound -= 1
+            updateGameRound()
         else:
             if globalGameRound != STOP_GAME_FLAG:
                 showMsg(gameNotTiedHandlerGUI(userPlayOption, computerPlayOption))
                 updateScoreBoard()
-        globalGameRound -= 1
-        gameRound += 1
-        main.mainloop()
-    popupMsg(getWinner(userWinCount, tieCount, computerWinCount))
-    gameRound = 1   # Reset the value
+                globalGameRound -= 1        # Put inside bcoz when globalGameRound = STOP_GAME_FLAG
+                updateGameRound()           # it will this else
+        if globalGameRound == 0:
+            msg = getGameResult(userWinCount, tieCount, computerWinCount)
+            popupMsg(msg)
+            if not isGameTied(msg):
+                gameRound = 1  # Reset the value
+                updateGameRound()
+                resetScoreBoard()
+                showMsg("Game Over!                                ")  # Reset the msg box
+                popup.deiconify()
+            else:
+                globalGameRound += 1
+                updateGameRound()
+        main.mainloop()  # This infinite loop should be the last line of the function code
 
 
-while True:
-    gameManagerGUI()
+gameManagerGUI()
 
 
 
