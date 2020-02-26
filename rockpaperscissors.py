@@ -7,8 +7,8 @@ import ctypes  # An included library with Python install.
 import sys
 
 #  Pop up GUI
-popup = Tk()    # For user select game rounds
-main = Tk()     # Main Pop up
+popup = Tk()  # For user select game rounds
+main = Toplevel()  # Main Pop up
 
 #  Game Status Flag/ To start or end the game
 STOP_GAME_FLAG = 999
@@ -34,13 +34,12 @@ playOptions = ["Rock", "Paper", "Scissors"]
 #  Randomize computer play options
 computerPlayOption = playOptions[randint(0, 2)]
 
-
-#  Desc: Verify sser's play option ()
+#  Desc: Verify user's play option ()
 #  Param: Input from user
 #  Retval: Rock, Paper, Scissors, False
 def verifyUserPlayOption(argument):
     if argument.lower() == "rock" or \
-        argument.lower() == "paper" or  \
+            argument.lower() == "paper" or \
             argument.lower() == "scissors":
         return argument
     else:
@@ -171,7 +170,7 @@ def updateGameRound():
     gameRound_Label.place(x=370, y=20)
 
 
-#-----------------Events for button pressed-----------------
+# -----------------Events for button pressed-----------------
 def userSelectRock():
     global globalUserPlayOption
     globalUserPlayOption = "Rock"
@@ -226,32 +225,60 @@ def userSelectExit():
 #  Create an popup message box for user to select game round
 #  Ref: https://www.youtube.com/watch?v=4McKSuuUQ-0
 def popupMsgSelectGameRound(msg):
-
     popup.wm_title("Game Menu")
+    # ICON src: http://www.iconarchive.com/show/umicons-icons-by-mattahan/Games-icon.html
+    #popup.iconbitmap(r'gameConsole.ico')    # Works within the IDE but not working for .exe
+    # Need to change for different directory
+    popup.iconbitmap(r'C:\Users\USER\PycharmProjects\RockPaperScissorsGame\gameConsole.ico')
     label = Label(popup, text=msg)
-    label.pack(side="top", fill="x", pady=10)
-    B1 = Button(popup, text="1", width=10, height=5, command=userSelectOneRound)
-    B1.pack()
-    B2 = Button(popup, text="3", width=10, height=5, command=userSelectThreeRound)
-    B2.pack()
-    B3 = Button(popup, text="10", width=10, height=5, command=userSelectTenRound)
-    B3.pack()
-    B4 = Button(popup, text="Exit", width=10, height=5, command=userSelectExit)
-    B4.pack()
+    label.pack(side=TOP, fill="x", pady=10)
+    B1 = Button(popup, text="1", width=5, height=3, command=userSelectOneRound)
+    B1.pack(side=LEFT)
+    B2 = Button(popup, text="3", width=5, height=3, command=userSelectThreeRound)
+    B2.pack(side=LEFT)
+    B3 = Button(popup, text="10", width=5, height=3, command=userSelectTenRound)
+    B3.pack(side=LEFT)
+    B4 = Button(popup, text="Exit", width=5, height=3, bg="red", command=userSelectExit)
+    B4.pack(side=RIGHT)
 
 
 # GUI menu to play the game
 def popupMain():
     main.resizable(False, False)
     main.title('Rock, Paper and Scissors Game, by Jason')
-    main.geometry('500x350')
+    # ICON src: http://www.iconarchive.com/show/umicons-icons-by-mattahan/Games-icon.html
+    # Need to change for diferrent directory
+    #main.iconbitmap(r'gameConsole.ico) # Works within the IDE but not working for .exe
+    main.iconbitmap(r'C:\Users\USER\PycharmProjects\RockPaperScissorsGame\gameConsole.ico')
+    main.geometry('500x348')    # Offset horizontal pixels to fit the window with buttons
+    # Create image for the option buttons
+    # Image dont display previosly because the garbage collector clear the image
+    # Ref: https://stackoverflow.com/questions/22200003/tkinter-button-not-showing-image
+    # Need to change for different directory
+    rockPhoto = PhotoImage(file=r'C:\Users\USER\PycharmProjects\RockPaperScissorsGame\rock_resized.png')
+    paperPhoto = PhotoImage(file=r'C:\Users\USER\PycharmProjects\RockPaperScissorsGame\paper_resized.png')
+    scissorsPhoto = PhotoImage(file=r'C:\Users\USER\PycharmProjects\RockPaperScissorsGame\scissors_resized.png')
+    #rockPhoto = PhotoImage(file=r'rock_resized.png')   # Works within the IDE but not working for .exe
+    #paperPhoto = PhotoImage(file=r'paper_resized.png') # Works within the IDE but not working for .exe
+    #scissorsPhoto = PhotoImage(file=r'scissors_resized.png')   # Works within the IDE but not working for .exe
+
     #  Create the play option buttons
     #  Ref: https://stackoverflow.com/questions/46284901/how-do-i-resize-buttons-in-pixels-tkinter/
     #  Reference to resize the button
-    main.ButtonRock = Button(main, text="Rock", command=userSelectRock).place(x=0, y=0, width=100, height=116)
-    main.ButtonPaper = Button(main, text="Paper", command=userSelectPaper).place(x=0, y=116, width=100, height=116)
-    main.ButtonScissors = Button(main, text="Scissors", command=userSelectScissors).place(x=0, y=232, width=100,
-                                                                                          height=116)
+    ButtonRock = Button(main, text="Rock", command=userSelectRock)
+    ButtonRock.place(x=0, y=0, width=100, height=116)
+    ButtonRock.image = rockPhoto
+    ButtonRock.config(image=rockPhoto, width="120", height="120")
+
+    ButtonPaper = Button(main, text="Paper", command=userSelectPaper)
+    ButtonPaper.place(x=0, y=116, width=100, height=116)
+    ButtonPaper.image = paperPhoto
+    ButtonPaper.config(image=paperPhoto, width="120", height="120")
+
+    ButtonScissors = Button(main, text="Scissors", command=userSelectScissors)
+    ButtonScissors.place(x=0, y=232, width=100, height=116)
+    ButtonScissors.image = scissorsPhoto
+    ButtonScissors.config(image=scissorsPhoto, width="120", height="120")
 
 
 # Initialise the windows of hide it using withdraw()
@@ -298,8 +325,8 @@ def gameManagerGUI():
     global gameRound
 
     initWindows()
-    popup.deiconify()
-    main.deiconify()
+    main.deiconify()  # Display the main menu window
+    popup.deiconify()  # Display the sub menu window
     while globalGameRound != 0:
         updateGameRound()
         updateScoreBoard()
@@ -318,8 +345,8 @@ def gameManagerGUI():
             if globalGameRound != STOP_GAME_FLAG:
                 showMsg(gameNotTiedHandlerGUI(userPlayOption, computerPlayOption))
                 updateScoreBoard()
-                globalGameRound -= 1        # Put inside bcoz when globalGameRound = STOP_GAME_FLAG
-                updateGameRound()           # it will this else
+                globalGameRound -= 1  # Put inside bcoz when globalGameRound = STOP_GAME_FLAG
+                updateGameRound()  # it will this else
         if globalGameRound == 0:
             msg = getGameResult(userWinCount, tieCount, computerWinCount)
             popupMsg(msg)
@@ -336,9 +363,3 @@ def gameManagerGUI():
 
 
 gameManagerGUI()
-
-
-
-
-
-
