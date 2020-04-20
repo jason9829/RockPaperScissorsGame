@@ -229,7 +229,7 @@ def popupMsgSelectGameRound(msg):
     # ICON src: http://www.iconarchive.com/show/umicons-icons-by-mattahan/Games-icon.html
     #popup.iconbitmap(r'gameConsole.ico')    # Works within the IDE but not working for .exe
     # Need to change for different directory
-    popup.iconbitmap(r'C:\Users\USER\PycharmProjects\RockPaperScissorsGame\gameConsole.ico')
+    popup.iconbitmap(r'.\images\gameConsole.ico')
     label = Label(popup, text=msg)
     label.pack(side=TOP, fill="x", pady=10)
     B1 = Button(popup, text="1", width=5, height=3, command=userSelectOneRound)
@@ -249,15 +249,15 @@ def popupMain():
     # ICON src: http://www.iconarchive.com/show/umicons-icons-by-mattahan/Games-icon.html
     # Need to change for diferrent directory
     #main.iconbitmap(r'gameConsole.ico) # Works within the IDE but not working for .exe
-    main.iconbitmap(r'C:\Users\USER\PycharmProjects\RockPaperScissorsGame\gameConsole.ico')
+    main.iconbitmap(r'.\images\\gameConsole.ico')
     main.geometry('500x348')    # Offset horizontal pixels to fit the window with buttons
     # Create image for the option buttons
     # Image dont display previosly because the garbage collector clear the image
     # Ref: https://stackoverflow.com/questions/22200003/tkinter-button-not-showing-image
     # Need to change for different directory
-    rockPhoto = PhotoImage(file=r'C:\Users\USER\PycharmProjects\RockPaperScissorsGame\rock_resized.png')
-    paperPhoto = PhotoImage(file=r'C:\Users\USER\PycharmProjects\RockPaperScissorsGame\paper_resized.png')
-    scissorsPhoto = PhotoImage(file=r'C:\Users\USER\PycharmProjects\RockPaperScissorsGame\scissors_resized.png')
+    rockPhoto = PhotoImage(file=r'.\images\rock_resized.png')
+    paperPhoto = PhotoImage(file=r'.\images\paper_resized.png')
+    scissorsPhoto = PhotoImage(file=r'.\images\scissors_resized.png')
     #rockPhoto = PhotoImage(file=r'rock_resized.png')   # Works within the IDE but not working for .exe
     #paperPhoto = PhotoImage(file=r'paper_resized.png') # Works within the IDE but not working for .exe
     #scissorsPhoto = PhotoImage(file=r'scissors_resized.png')   # Works within the IDE but not working for .exe
