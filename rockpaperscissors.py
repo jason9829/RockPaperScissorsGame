@@ -362,4 +362,4 @@ def gameManagerGUI():
         main.mainloop()  # This infinite loop should be the last line of the function code
 
 
-# gameManagerGUI()  Remove the comment to allow GUI to run because this is commented for unit testing.
+ gameManagerGUI()  Remove the comment to allow GUI to run because this is commented for unit testing.
